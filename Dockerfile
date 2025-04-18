@@ -1,6 +1,7 @@
 FROM python:3.10-slim
 WORKDIR /app
-COPY serp_bot.py .
+COPY requirements.txt .
+COPY serp_bot.py ./app.py
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
