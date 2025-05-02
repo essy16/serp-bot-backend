@@ -9,7 +9,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install gunicorn
 
 # Copy application code
-COPY serp_bot.py ./app.py
+COPY app/serp_bot.py ./app.py
 
 # Expose port 5000
 EXPOSE 5000
