@@ -8,6 +8,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install Gunicorn
 RUN pip install gunicorn
 
+COPY app/ ./
+
+
 # Copy application code
 COPY app/serp_bot.py ./app.py
 
