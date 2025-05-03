@@ -1,5 +1,5 @@
 # === serp_bot.py ===
-from flask import Flask
+from flask import Flask,jsonify
 from flask_cors import CORS
 from models import db
 from routes import register_routes
@@ -22,6 +22,14 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # Initialize extensions
 db.init_app(app)
 register_routes(app)
+
+with app.app_context():
+    db.create_all()
+
+@app.errorhandler(Exception)
+def handle_error(e):
+    return jsonify({"error": str(e)}), 500
+
 
 # Run server
 if __name__ == '__main__':

@@ -13,13 +13,8 @@ def register_routes(app):
     app.config['UPLOAD_FOLDER'] = 'uploads'
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-
-    from flask import request, jsonify
-from models import db, Client, Job, process_csv
-import os
-
-UPLOAD_FOLDER = 'uploads'
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    UPLOAD_FOLDER = 'uploads'
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def register_routes(app):
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
