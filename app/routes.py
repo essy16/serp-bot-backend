@@ -13,7 +13,6 @@ def register_routes(app):
     app.config['UPLOAD_FOLDER'] = 'uploads'
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-    db.init_app(app)
 
     @app.route('/clients', methods=['GET'])
     def get_clients():
