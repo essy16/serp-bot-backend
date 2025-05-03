@@ -5,6 +5,8 @@ from models import db
 from routes import register_routes
 import os
 from dotenv import load_dotenv
+from flask_migrate import Migrate
+
 
 # Load environment variables
 load_dotenv()
@@ -21,6 +23,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Initialize extensions
 db.init_app(app)
+migrate = Migrate(app, db)
 register_routes(app)
 
 with app.app_context():
