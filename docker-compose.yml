@@ -1,6 +1,22 @@
-version: "3"
+version: '3.8'
+
 services:
-  backend:
+  app:
     build: .
     ports:
       - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - DB_URI=mysql+pymysql://root:root@db:3306/clients_jobs_db
+    volumes:
+      - ./app:/app
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Essy5036!
+      MYSQL_DATABASE: clients_jobs_db
+    ports:
+      - "3306:3306"
