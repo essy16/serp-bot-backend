@@ -28,8 +28,6 @@ db.init_app(app)
 migrate = Migrate(app, db)
 register_routes(app)
 
-with app.app_context():
-    db.create_all()
 
 @app.errorhandler(Exception)
 def handle_error(e):
