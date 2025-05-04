@@ -8,7 +8,7 @@ services:
     depends_on:
       - db
     environment:
-      - DB_URI=mysql+pymysql://root:Essy5036!@db:3306/clients_jobs_db
+      - mysql -u doadmin -pAVNS_UvD8NRS3PQSeGk2sRiq -h client-job-db-do-user-20060435-0.l.db.ondigitalocean.com -P 25060 < 
     volumes:
       - ./app:/app
 
