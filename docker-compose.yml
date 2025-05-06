@@ -8,7 +8,7 @@ services:
     depends_on:
       - db
     environment:
-      -  mysql+pymysql://doadmin:AVNS_UvD8NRS3PQSeGk2sRiq@client-job-db-do-user-20060435-0.l.db.ondigitalocean.com:25060/clients_jobs_db?ssl_mode=REQUIRED
+      -  mysql+pymysql://doadmin:AVNS_UvD8NRS3PQSeGk2sRiq@client-job-db-do-user-20060435-0.l.db.ondigitalocean.com:25060/clients_jobs_db
 
   db:
     image: mysql:8.0
