@@ -5,6 +5,8 @@ from routes import register_routes
 import os
 from dotenv import load_dotenv
 from flask_migrate import Migrate
+from pathlib import Path
+
 
 # Load .env
 load_dotenv()
@@ -12,14 +14,27 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# Database config
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI')
+
+import os
+
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
+SSL_CA = os.getenv("SSL_CA")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    f"?ssl_ca={SSL_CA}"
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     'connect_args': {
         'ssl': {
-            'ca': 'serp-bot-backend\certs\ca-certificate.crt'
+            'ca': str(Path(__file__).resolve().parent.parent / 'certs' / 'ca-certificate.crt')
         }
     }
 }
