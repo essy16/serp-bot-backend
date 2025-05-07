@@ -9,13 +9,9 @@ services:
       - ./app:/app
       - ./certs:/certs
     environment:
-      - DB_URI=mysql+pymysql://doadmin:AVNS_UvD8NRS3PQSeGk2sRiq@client-job-db-do-user-20060435-0.l.db.ondigitalocean.com:25060/clients_jobs_db
-
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: Essy5036!
-      MYSQL_DATABASE: clients_jobs_db
-    ports:
-      - "3306:3306"
+      - DB_HOST=client-job-db-do-user-20060435-0.l.db.ondigitalocean.com
+      - DB_PORT=25060
+      - DB_NAME=clients_jobs_db
+      - DB_USER=doadmin
+      - DB_PASSWORD=AVNS_UvD8NRS3PQSeGk2sRiq
+      - SSL_CA=/certs/ca-certificate.crt
