@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
     'connect_args': {
         'ssl': {
-            'ssl_ca': '/app/ca-certificate.crt'  # Replace with actual location
+            'ca': 'serp-bot-backend\certs\ca-certificate.crt'
         }
     }
 }
