@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import pymysql
 import csv
 
 # Initialize SQLAlchemy
@@ -43,12 +42,3 @@ def process_csv(file_path, client_id):
     db.session.add(new_job)
     db.session.commit()
     return new_job
-
-
-def create_connection():
-    return pymysql.connect(
-        host='localhost',
-        user='root',
-        password='',
-        db='clients_jobs_db'
-    )

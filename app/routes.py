@@ -6,12 +6,7 @@ def register_routes(app):
     from dotenv import load_dotenv
     import logging
     
-
-    load_dotenv()
     CORS(app)
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     UPLOAD_FOLDER = 'uploads'
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
