@@ -4,6 +4,7 @@ def register_routes(app):
     import os
     from flask import request, jsonify
     from dotenv import load_dotenv
+    import logging
     
 
     load_dotenv()
@@ -31,6 +32,7 @@ def register_routes(app):
                 'total_clicks': total_clicks
             })
         return jsonify(result)
+
 
     @app.route('/clients', methods=['POST'])
     def create_client():

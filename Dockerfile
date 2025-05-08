@@ -5,6 +5,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# ✅ Ensure 'uploads' directory exists
+RUN mkdir -p /app/uploads
+
 # Install Gunicorn
 RUN pip install gunicorn
 
