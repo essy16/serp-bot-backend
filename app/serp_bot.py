@@ -11,41 +11,45 @@ from pathlib import Path
 # Load .env
 load_dotenv()
 
-print("✅ Loaded DB_URI:", os.getenv("DB_URI"))
-print("✅ DB_HOST:", os.getenv("DB_HOST"))
-print("✅ DB_URI:", os.getenv("DB_URI"))
+# Get database configuration
+DB_URI = os.getenv("DB_URI")
+if not DB_URI:
+    # If DB_URI is not set, construct it from individual components
+    DB_USER = os.getenv("DB_USER")
+    DB_PASSWORD = os.getenv("DB_PASSWORD")
+    DB_HOST = os.getenv("DB_HOST")
+    DB_PORT = os.getenv("DB_PORT", "25060")
+    DB_NAME = os.getenv("DB_NAME")
+    SSL_CA = os.getenv("SSL_CA")
+    
+    # Check required parameters
+    if not all([DB_USER, DB_PASSWORD, DB_HOST, DB_NAME]):
+        raise ValueError("Missing database configuration. Please set DB_URI or individual DB_* parameters.")
+    
+    # Construct URI
+    DB_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    if SSL_CA:
+        DB_URI += f"?ssl_ca={SSL_CA}"
 
+print(f"✅ Using database URI: {DB_URI}")
 
 app = Flask(__name__)
 CORS(app)
 
-
-import os
-
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-DB_NAME = os.getenv("DB_NAME")
-SSL_CA = os.getenv("SSL_CA")
-
-app.config["SQLALCHEMY_DATABASE_URI"] = (
-    f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:25060/{DB_NAME}"
-    + (f"?ssl_ca={SSL_CA}" if SSL_CA else "")
-)
+# Configure database
+app.config["SQLALCHEMY_DATABASE_URI"] = DB_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-
-
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'connect_args': {
-        'ssl': {
-            'ca': str(Path(__file__).resolve().parent.parent / 'certs' / 'ca-certificate.crt')
+# Configure SSL if needed
+if os.getenv("SSL_CA"):
+    ssl_ca_path = str(Path(__file__).resolve().parent / os.getenv("SSL_CA"))
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'connect_args': {
+            'ssl': {
+                'ca': ssl_ca_path
+            }
         }
     }
-}
-
 
 # Create upload folder
 app.config['UPLOAD_FOLDER'] = 'uploads'
