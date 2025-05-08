@@ -7,4 +7,9 @@ services:
       - ./app:/app
       - ./certs:/certs
     environment:
-      - DB_URI=mysql+pymysql://doadmin:AVNS_UvD8NRS3PQSeGk2sRiq@client-job-db-do-user-20060435-0.l.db.ondigitalocean.com:25060/clients_jobs_db?ssl_ca=/certs/ca-certificate.crt
+      DB_HOST: client-job-db-do-user-20060435-0.l.db.ondigitalocean.com
+      DB_PORT: "25060"
+      DB_NAME: clients_jobs_db
+      DB_USER: doadmin
+      DB_PASSWORD: AVNS_UvD8NRS3PQSeGk2sRiq
+      SSL_CA: /certs/ca-certificate.crt
