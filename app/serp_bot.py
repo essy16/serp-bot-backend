@@ -11,6 +11,9 @@ from pathlib import Path
 # Load .env
 load_dotenv()
 
+print("✅ Loaded DB_URI:", os.getenv("DB_URI"))
+
+
 app = Flask(__name__)
 CORS(app)
 
@@ -29,6 +32,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
     + (f"?ssl_ca={SSL_CA}" if SSL_CA else "")
 )
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
 
 
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
