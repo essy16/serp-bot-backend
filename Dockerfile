@@ -7,8 +7,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy .env file into the container
-# COPY .env /app/app/.env
+
 
 # Install Gunicorn (optional if in requirements.txt)
 RUN pip install gunicorn

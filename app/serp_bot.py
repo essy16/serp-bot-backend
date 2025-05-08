@@ -12,6 +12,8 @@ from pathlib import Path
 load_dotenv()
 
 print("✅ Loaded DB_URI:", os.getenv("DB_URI"))
+print("✅ DB_HOST:", os.getenv("DB_HOST"))
+print("✅ DB_URI:", os.getenv("DB_URI"))
 
 
 app = Flask(__name__)
