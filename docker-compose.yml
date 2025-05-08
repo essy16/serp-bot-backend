@@ -1,13 +1,11 @@
-version: '3.9'
-
 services:
   app:
     build: .
     ports:
       - "5000:5000"
     volumes:
-      - ./app:/app
-      - ./certs:/certs
-      - ./app/uploads:/app/uploads  # Ensure uploads directory is mounted
+      - ./app:/app/app
+      - ./certs:/app/certs
+      - ./app/uploads:/app/app/uploads
     environment:
-      - DB_URI=mysql+pymysql://doadmin:AVNS_UvD8NRS3PQSeGk2sRiq@client-job-db-do-user-20060435-0.l.db.ondigitalocean.com:25060/clients_jobs_db?ssl_ca=/certs/ca-certificate.crt
+      - DB_URI=mysql+pymysql://doadmin:AVNS_UvD8NRS3PQSeGk2sRiq@client-job-db-do-user-20060435-0.l.db.ondigitalocean.com:25060/clients_jobs_db?ssl_ca=/app/certs/ca-certificate.crt
