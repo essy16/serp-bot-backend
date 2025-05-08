@@ -25,7 +25,7 @@ DB_NAME = os.getenv("DB_NAME")
 SSL_CA = os.getenv("SSL_CA")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:25060/{DB_NAME}"
     + (f"?ssl_ca={SSL_CA}" if SSL_CA else "")
 )
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
