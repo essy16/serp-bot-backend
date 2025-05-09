@@ -14,7 +14,7 @@ RUN pip install gunicorn
 
 # Copy app code and certs
 COPY app/ ./app/
-COPY certs/ ./certs/
+COPY app/certs/ ./certs/
 
 # Ensure uploads directory exists
 RUN mkdir -p /app/app/uploads
