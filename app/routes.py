@@ -28,13 +28,22 @@ def register_routes(app):
             })
         return jsonify(result)
 
+
     @app.route('/clients/name/<name>', methods=['GET'])
     def get_client_by_name(name):
-        client = Client.query.filter(Client.name.ilike(name)).first()
+        cleaned_name = name.strip()
+        client = Client.query.filter(Client.name.ilike(f"%{cleaned_name}%")).first()
         if client:
             return jsonify({'id': client.id, 'name': client.name})
-        else:
-            return jsonify({'error': 'Client not found'}), 404
+        return jsonify({'error': 'Client not found'}), 404
+ 
+    @app.route('/clients/<int:client_id>', methods=['GET'])
+    def fetch_client_by_id(client_id):  # ← changed name
+        client = Client.query.get_or_404(client_id)
+        return jsonify({'id': client.id, 'name': client.name})
+
+
+
 
 
 
